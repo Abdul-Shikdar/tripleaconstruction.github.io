@@ -1283,30 +1283,30 @@
         </div>
       </div>
     </div>
-    <form class="contact-form" onsubmit="return false;">
+    <form class="contact-form" action="https://formspree.io/f/xrevlvqz" method="POST">
       <div class="form-row">
         <div class="form-group">
           <label>First Name</label>
-          <input type="text" placeholder="John"/>
+          <input type="text" name="first_name" placeholder="John" required/>
         </div>
         <div class="form-group">
           <label>Last Name</label>
-          <input type="text" placeholder="Smith"/>
+          <input type="text" name="last_name" placeholder="Smith" required/>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label>Phone Number</label>
-          <input type="tel" placeholder="07700 000000"/>
+          <input type="tel" name="phone" placeholder="07700 000000" required/>
         </div>
         <div class="form-group">
           <label>Email Address</label>
-          <input type="email" placeholder="john@example.com"/>
+          <input type="email" name="email" placeholder="john@example.com" required/>
         </div>
       </div>
       <div class="form-group">
         <label>Type of Enquiry</label>
-        <select>
+        <select name="enquiry_type">
           <option>Residential</option>
           <option>Commercial / Landlord</option>
           <option>Emergency Repair</option>
@@ -1315,7 +1315,7 @@
       </div>
       <div class="form-group">
         <label>Service Required</label>
-        <select>
+        <select name="service_required">
           <option>General Building</option>
           <option>Roofing</option>
           <option>Plumbing</option>
@@ -1329,7 +1329,7 @@
       </div>
       <div class="form-group">
         <label>Tell us about your job</label>
-        <textarea placeholder="Describe what you need — location, size of job, any urgency..."></textarea>
+        <textarea name="message" placeholder="Describe what you need — location, size of job, any urgency..."></textarea>
       </div>
       <button class="form-submit" type="submit">Send Enquiry →</button>
     </form>
