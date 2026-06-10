@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Triple A Construction</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --brick: #8B3A2A;
+    --brick-dark: #5C2418;
+    --brick-light: #B5503C;
+    --gold: #C49A3C;
+    --gold-light: #D4AF5A;
+    --cream: #F5F0E8;
+    --dark: #1A1208;
+    --mid: #3D2B1A;
+    --text: #2C1A0E;
+    --grey: #6B5B4E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--dark);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 64px;
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .logo-icon {
+    width: 40px; height: 40px;
+  }
+
+  .nav-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+  }
+
+  .nav-name span { color: var(--gold); }
+
+  .nav-links {
+    display: flex; gap: 28px; list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--brick);
+    color: #fff !important;
+    padding: 8px 18px;
+    font-size: 12px !important;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark);
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 5% 60px;
+  }
+
+  .hero-texture {
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(139,58,42,0.04) 40px, rgba(139,58,42,0.04) 80px),
+      repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(196,154,60,0.03) 40px, rgba(196,154,60,0.03) 80px);
+  }
+
+  .hero-accent {
+    position: absolute;
+    right: -60px; top: 50%;
+    transform: translateY(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(139,58,42,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 680px;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(196,154,60,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    margin-bottom: 28px;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(42px, 6vw, 80px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.0;
+    letter-spacing: 0.02em;
+    margin-bottom: 10px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    color: var(--brick-light);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    margin-bottom: 24px;
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: #aaa;
+    line-height: 1.8;
+    margin-bottom: 36px;
+    max-width: 500px;
+    font-weight: 300;
+  }
+
+  .hero-btns {
+    display: flex; gap: 14px; flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--brick);
+    color: #fff;
+    padding: 14px 32px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--brick-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--gold);
+    padding: 14px 32px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--gold);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { background: rgba(196,154,60,0.1); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 40px;
+    margin-top: 52px;
+    padding-top: 36px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .stat-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: #888;
+    letter-spacing: 0.05em;
+  }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--brick-dark);
+    padding: 18px 5%;
+    display: flex; align-items: center; justify-content: center; gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+  }
+
+  .trust-icon { color: var(--gold); font-size: 16px; }
+
+  /* SECTIONS */
+  section { padding: 90px 5%; }
+
+  .section-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--brick);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .section-title span { color: var(--brick); }
+
+  .section-desc {
+    font-size: 16px;
+    color: var(--grey);
+    line-height: 1.8;
+    max-width: 560px;
+    font-weight: 300;
+  }
+
+  /* ABOUT */
+  .about { background: #fff; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 50px;
+  }
+
+  .about-img-block {
+    position: relative;
+  }
+
+  .about-img-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--brick-dark) 0%, var(--mid) 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-img-placeholder::after {
+    content: '🏗️';
+    font-size: 80px;
+    opacity: 0.3;
+  }
+
+  .about-accent-box {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    background: var(--gold);
+    padding: 20px 24px;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .about-accent-box .num {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1;
+  }
+
+  .about-accent-box .lbl {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--dark);
+    opacity: 0.7;
+  }
+
+  .about-points {
+    display: flex; flex-direction: column; gap: 16px;
+    margin-top: 28px;
+  }
+
+  .about-point {
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+
+  .point-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: var(--brick);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 14px;
+  }
+
+  .point-text h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 2px;
+  }
+
+  .point-text p {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* SERVICES */
+  .services { background: var(--cream); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2px;
+    margin-top: 50px;
+    background: #ddd;
+  }
+
+  .service-card {
+    background: #fff;
+    padding: 32px 28px;
+    transition: background 0.25s, transform 0.25s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 3px;
+    background: var(--brick);
+    transition: width 0.3s;
+  }
+
+  .service-card:hover::before { width: 100%; }
+  .service-card:hover { background: var(--dark); transform: translateY(-4px); }
+  .service-card:hover .service-title { color: #fff; }
+  .service-card:hover .service-desc { color: #999; }
+  .service-card:hover .service-icon { background: var(--brick); }
+
+  .service-icon {
+    width: 52px; height: 52px;
+    background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 18px;
+    transition: background 0.25s;
+  }
+
+  .service-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+    transition: color 0.25s;
+  }
+
+  .service-desc {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.7;
+    font-weight: 300;
+    transition: color 0.25s;
+  }
+
+  /* RESIDENTIAL & COMMERCIAL */
+  .sectors {
+    background: var(--dark);
+    padding: 90px 5%;
+  }
+
+  .sectors-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    margin-top: 50px;
+  }
+
+  .sector-card {
+    padding: 52px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sector-card.residential { background: var(--brick-dark); }
+  .sector-card.commercial { background: var(--mid); }
+
+  .sector-card::after {
+    content: attr(data-icon);
+    position: absolute;
+    right: 20px; bottom: 10px;
+    font-size: 120px;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+
+  .sector-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .sector-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  .sector-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 28px;
+  }
+
+  .sector-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+
+  .sector-list li {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.75);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .sector-list li::before {
+    content: '→';
+    color: var(--gold);
+  }
+
+  /* CONTACT */
+  .contact { background: #fff; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    margin-top: 50px;
+    align-items: start;
+  }
+
+  .contact-info { display: flex; flex-direction: column; gap: 28px; }
+
+  .contact-item {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+
+  .contact-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: var(--brick);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 16px;
+  }
+
+  .contact-item h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 4px;
+  }
+
+  .contact-item p {
+    font-size: 15px;
+    color: var(--dark);
+    font-weight: 400;
+  }
+
+  .contact-form {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+
+  .form-group label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    border: 1px solid #ddd;
+    padding: 12px 14px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 14px;
+    color: var(--dark);
+    background: var(--cream);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--brick);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 110px; }
+
+  .form-submit {
+    background: var(--brick);
+    color: #fff;
+    border: none;
+    padding: 16px 32px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    align-self: flex-start;
+  }
+
+  .form-submit:hover { background: var(--brick-dark); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    padding: 48px 5% 24px;
+    border-top: 3px solid var(--gold);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 40px;
+  }
+
+  .footer-brand h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .footer-brand h3 span { color: var(--gold); }
+
+  .footer-brand p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-top: 10px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+  .footer-col ul li a {
+    font-size: 13px;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-col ul li a:hover { color: #fff; }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 10px;
+  }
+
+  .footer-bottom p {
+    font-size: 12px;
+    color: #555;
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .about-grid, .contact-grid, .sectors-grid, .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    .trust-bar { gap: 20px; }
+  }
+
+  /* CREDENTIALS */
+  .credentials {
+    background: var(--brick-dark);
+    padding: 48px 5%;
+  }
+
+  .credentials-grid {
+    display: flex; justify-content: center; align-items: center;
+    gap: 40px; flex-wrap: wrap;
+  }
+
+  .cred-item {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 18px 28px;
+  }
+
+  .cred-icon {
+    font-size: 28px;
+  }
+
+  .cred-text h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+  }
+
+  .cred-text p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 2px;
+  }
+
+  /* REVIEWS */
+  .reviews { background: var(--dark); padding: 90px 5%; }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 50px;
+  }
+
+  .review-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 28px;
+    position: relative;
+  }
+
+  .review-card::before {
+    content: '"';
+    position: absolute;
+    top: 16px; right: 20px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 80px;
+    color: var(--brick);
+    opacity: 0.3;
+    line-height: 1;
+  }
+
+  .review-stars {
+    color: var(--gold);
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+  }
+
+  .review-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .review-author {
+    display: flex; align-items: center; gap: 12px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 16px;
+  }
+
+  .review-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--brick);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .review-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: 0.04em;
+  }
+
+  .review-type {
+    font-size: 11px;
+    color: var(--gold);
+    margin-top: 2px;
+  }
+
+  .reviews-cta {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .reviews-cta p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  /* GALLERY */
+  .gallery { background: var(--cream); }
+
+  .gallery-filter {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin: 36px 0 28px;
+  }
+
+  .filter-btn {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border: 1px solid #ccc;
+    background: transparent;
+    color: var(--grey);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--brick);
+    color: #fff;
+    border-color: var(--brick);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+
+  .gallery-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--mid);
+  }
+
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--brick-dark), var(--mid));
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-placeholder-icon { font-size: 36px; opacity: 0.4; }
+  .gallery-placeholder-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: rgba(26,12,8,0.75);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 6px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-item:hover .gallery-placeholder { transform: scale(1.05); }
+  .gallery-item:hover img { transform: scale(1.05); }
+
+  .gallery-overlay-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.06em;
+    text-align: center;
+    padding: 0 16px;
+  }
+
+  .gallery-overlay-tag {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .gallery-cta {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .gallery-cta p {
+    font-size: 14px;
+    color: var(--grey);
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge { animation: fadeUp 0.6s ease both; }
+  .hero h1 { animation: fadeUp 0.6s 0.15s ease both; }
+  .hero-sub { animation: fadeUp 0.6s 0.25s ease both; }
+  .hero p { animation: fadeUp 0.6s 0.35s ease both; }
+  .hero-btns { animation: fadeUp 0.6s 0.45s ease both; }
+  .hero-stats { animation: fadeUp 0.6s 0.55s ease both; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="40" height="40" fill="#5C2418"/>
+      <polygon points="20,6 36,18 36,36 4,36 4,18" fill="none" stroke="#C49A3C" stroke-width="1.5"/>
+      <rect x="15" y="24" width="10" height="12" fill="#C49A3C"/>
+      <line x1="20" y1="6" x2="20" y2="36" stroke="#8B3A2A" stroke-width="1"/>
+      <circle cx="20" cy="6" r="2.5" fill="#C49A3C"/>
+    </svg>
+    <div class="nav-name"><span>TRIPLE A</span><br>CONSTRUCTION</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#sectors">Residential & Commercial</a></li>
+    <li><a href="#gallery">Our Work</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-texture"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-content">
+    <div class="hero-badge">UK Wide Coverage · Gas Safe Registered · Fully Qualified</div>
+    <h1>Built on <em>Quality.</em><br>Built to Last.</h1>
+    <div class="hero-sub">Triple A Construction</div>
+    <p>From new builds to handyman repairs — we handle every aspect of your property. Residential and commercial clients across the UK.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Get a Free Quote</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div>
+        <div class="stat-num">UK</div>
+        <div class="stat-label">Wide Coverage</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="trust-icon">⚡</span> Qualified Electrician</div>
+  <div class="trust-item"><span class="trust-icon">🔧</span> Qualified Plumber</div>
+  <div class="trust-item"><span class="trust-icon">🔥</span> Gas Safe Registered</div>
+  <div class="trust-item"><span class="trust-icon">🛡️</span> Fully Insured</div>
+  <div class="trust-item"><span class="trust-icon">✅</span> Free Quotations</div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-label">Who We Are</div>
+  <div class="section-title">Your Trusted <span>Building Partner</span></div>
+  <div class="section-desc">Triple A Construction delivers professional building and maintenance services to homeowners, landlords and commercial clients across the UK.</div>
+  <div class="about-grid">
+    <div class="about-img-block">
+      <div class="about-img-placeholder"></div>
+      <div class="about-accent-box">
+        <div class="num">AAA</div>
+        <div class="lbl">Rated Service</div>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:15px;color:var(--grey);line-height:1.9;font-weight:300;margin-bottom:28px;">
+        We are a fully qualified and insured construction company with years of hands-on experience. Whether you need a quick repair or a full renovation, our team brings the same level of professionalism and quality to every job — big or small.
+      </p>
+      <div class="about-points">
+        <div class="about-point">
+          <div class="point-icon">✓</div>
+          <div class="point-text">
+            <h4>Qualified & Certified</h4>
+            <p>Fully qualified electrician, plumber and Gas Safe registered engineer on every relevant job.</p>
+          </div>
+        </div>
+        <div class="about-point">
+          <div class="point-icon">✓</div>
+          <div class="point-text">
+            <h4>Landlord Specialists</h4>
+            <p>We work with landlords and property management companies — fast turnarounds, reliable communication.</p>
+          </div>
+        </div>
+        <div class="about-point">
+          <div class="point-icon">✓</div>
+          <div class="point-text">
+            <h4>UK Wide</h4>
+            <p>Operating across the United Kingdom — no job is too far.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">What We Do</div>
+  <div class="section-title">Our <span>Services</span></div>
+  <div class="section-desc">From the roof to the foundations — we cover every trade so you only need one number.</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🏗️</div>
+      <div class="service-title">General Building</div>
+      <div class="service-desc">New builds, extensions, refurbishments and structural work carried out to the highest standard.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <div class="service-title">Roofing</div>
+      <div class="service-desc">Repairs, replacements and new roof installations. Tiles, flat roofs and guttering.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <div class="service-title">Plumbing</div>
+      <div class="service-desc">Fully qualified plumber. Leaks, installations, bathrooms, boilers and full pipework.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <div class="service-title">Electrical</div>
+      <div class="service-desc">Qualified electrician. Rewires, consumer units, sockets, lighting and safety certificates.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔥</div>
+      <div class="service-title">Gas Engineering</div>
+      <div class="service-desc">Gas Safe registered. Boiler installs, servicing, landlord gas safety certificates.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎨</div>
+      <div class="service-title">Painting & Decorating</div>
+      <div class="service-desc">Interior and exterior painting. Wallpapering, plastering and full room makeovers.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛠️</div>
+      <div class="service-title">Handyman Services</div>
+      <div class="service-desc">No job too small. Flat pack, tiling, doors, fencing, odd jobs done properly.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏚️</div>
+      <div class="service-title">Property Maintenance</div>
+      <div class="service-desc">Regular or one-off maintenance packages for landlords and property managers.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section class="sectors" id="sectors">
+  <div class="section-label" style="color:var(--gold-light)">Who We Work With</div>
+  <div class="section-title" style="color:#fff">Residential <span style="color:var(--brick-light);">&</span> Commercial</div>
+  <div class="section-desc" style="color:#888;">We serve both homeowners and businesses across the UK with the same commitment to quality.</div>
+  <div class="sectors-grid">
+    <div class="sector-card residential" data-icon="🏠">
+      <div class="sector-label">For Homeowners</div>
+      <div class="sector-title">Residential</div>
+      <div class="sector-desc">Whether you're renovating your home, fixing an urgent problem or planning an extension — we're your one-stop trade team.</div>
+      <ul class="sector-list">
+        <li>Home renovations & extensions</li>
+        <li>Emergency repairs</li>
+        <li>Bathroom & kitchen fitting</li>
+        <li>Boiler installs & servicing</li>
+        <li>Full redecoration</li>
+      </ul>
+    </div>
+    <div class="sector-card commercial" data-icon="🏢">
+      <div class="sector-label">For Businesses & Landlords</div>
+      <div class="sector-title">Commercial</div>
+      <div class="sector-desc">Fast, reliable and professional. We understand the pressure of keeping properties occupied and businesses running smoothly.</div>
+      <ul class="sector-list">
+        <li>Landlord gas safety certificates</li>
+        <li>Electrical safety reports (EICR)</li>
+        <li>Between-tenancy refurbishments</li>
+        <li>Commercial fit-outs</li>
+        <li>Ongoing property management</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<div class="credentials">
+  <div class="credentials-grid">
+    <div class="cred-item">
+      <div class="cred-icon">🔒</div>
+      <div class="cred-text">
+        <h4>Enhanced DBS Checked</h4>
+        <p>All staff hold enhanced CRB/DBS certificates</p>
+      </div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-icon">🛡️</div>
+      <div class="cred-text">
+        <h4>Public Liability Insurance</h4>
+        <p>Fully covered on every job — residential & commercial</p>
+      </div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-icon">🔥</div>
+      <div class="cred-text">
+        <h4>Gas Safe Registered</h4>
+        <p>Certified gas engineers on all gas work</p>
+      </div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-icon">⚡</div>
+      <div class="cred-text">
+        <h4>NICEIC Qualified</h4>
+        <p>Fully qualified electricians for all electrical work</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="section-label" style="color:var(--gold-light)">What Our Clients Say</div>
+  <div class="section-title" style="color:#fff">Real <span style="color:var(--brick-light)">Reviews</span></div>
+  <div class="section-desc" style="color:#888;">Don't just take our word for it — here's what homeowners and landlords say about our work.</div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">Harvey and his team did an outstanding job on our full bathroom refit. Turned up on time, kept everything tidy and finished ahead of schedule. Couldn't ask for more.</div>
+      <div class="review-author">
+        <div class="review-avatar">JM</div>
+        <div>
+          <div class="review-name">James M.</div>
+          <div class="review-type">Homeowner — London</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">As a landlord with multiple properties, I need a reliable team I can trust. Triple A have been brilliant — fast turnarounds between tenancies and always professional.</div>
+      <div class="review-author">
+        <div class="review-avatar">SR</div>
+        <div>
+          <div class="review-name">Sarah R.</div>
+          <div class="review-type">Landlord — Midlands</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">Got my boiler replaced and full gas safety certificate sorted in one visit. Friendly, knowledgeable and great value. Highly recommend for any gas work.</div>
+      <div class="review-author">
+        <div class="review-avatar">TK</div>
+        <div>
+          <div class="review-name">Tom K.</div>
+          <div class="review-type">Homeowner — Manchester</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">Hired Triple A for a full house redecoration after buying a new property. The finish was immaculate — walls, ceilings, woodwork all perfect. Will definitely use again.</div>
+      <div class="review-author">
+        <div class="review-avatar">PD</div>
+        <div>
+          <div class="review-name">Priya D.</div>
+          <div class="review-type">Homeowner — Birmingham</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reviews-cta">
+    <p>Happy with our work? We'd love to hear from you.</p>
+    <a href="#contact" class="btn-outline">Leave a Review</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="section-label">Portfolio</div>
+  <div class="section-title">Our <span>Work</span></div>
+  <div class="section-desc">A selection of recent projects — from full renovations to specialist trades work across the UK.</div>
+
+  <div class="gallery-filter">
+    <button class="filter-btn active" onclick="filterGallery('all', this)">All Work</button>
+    <button class="filter-btn" onclick="filterGallery('building', this)">Building</button>
+    <button class="filter-btn" onclick="filterGallery('roofing', this)">Roofing</button>
+    <button class="filter-btn" onclick="filterGallery('plumbing', this)">Plumbing</button>
+    <button class="filter-btn" onclick="filterGallery('electrical', this)">Electrical</button>
+    <button class="filter-btn" onclick="filterGallery('decorating', this)">Decorating</button>
+  </div>
+
+  <div class="gallery-grid" id="galleryGrid">
+    <div class="gallery-item" data-cat="building">
+      <div class="gallery-placeholder"><div class="gallery-placeholder-icon">🏗️</div><div class="gallery-placeholder-label">Your photo here</div></div>
+      <div class="gallery-overlay"><div class="gallery-overlay-title">House Extension — London</div><div class="gallery-overlay-tag">General Building</div></div>
+    </div>
+    <div class="gallery-item" data-cat="roofing">
+      <div class="gallery-placeholder"><div class="gallery-placeholder-icon">🏠</div><div class="gallery-placeholder-label">Your photo here</div></div>
+      <div class="gallery-overlay"><div class="gallery-overlay-title">Full Roof Replacement</div><div class="gallery-overlay-tag">Roofing</div></div>
+    </div>
+    <div class="gallery-item" data-cat="decorating">
+      <div class="gallery-placeholder"><div class="gallery-placeholder-icon">🎨</div><div class="gallery-placeholder-label">Your photo here</div></div>
+      <div class="gallery-overlay"><div class="gallery-overlay-title">Full Interior Redecoration</div><div class="gallery-overlay-tag">Painting & Decorating</div></div>
+    </div>
+    <div class="gallery-item" data-cat="plumbing">
+      <div class="gallery-placeholder"><div class="gallery-placeholder-icon">🔧</div><div class="gallery-placeholder-label">Your photo here</div></div>
+      <div class="gallery-overlay"><div class="gallery-overlay-title">Bathroom Refit</div><div class="gallery-overlay-tag">Plumbing</div></div>
+    </div>
+    <div class="gallery-item" data-cat="electrical">
+      <div class="gallery-placeholder"><div class="gallery-placeholder-icon">⚡</div><div class="gallery-placeholder-label">Your photo here</div></div>
+      <div class="gallery-overlay"><div class="gallery-overlay-title">Full Rewire — Commercial</div><div class="gallery-overlay-tag">Electrical</div></div>
+    </div>
+    <div class="gallery-item" data-cat="building">
+      <div class="gallery-placeholder"><div class="gallery-placeholder-icon">🧱</div><div class="gallery-placeholder-label">Your photo here</div></div>
+      <div class="gallery-overlay"><div class="gallery-overlay-title">Landlord Refurbishment</div><div class="gallery-overlay-tag">General Building</div></div>
+    </div>
+    <div class="gallery-item" data-cat="roofing">
+      <div class="gallery-placeholder"><div class="gallery-placeholder-icon">🏚️</div><div class="gallery-placeholder-label">Your photo here</div></div>
+      <div class="gallery-overlay"><div class="gallery-overlay-title">Flat Roof Repair</div><div class="gallery-overlay-tag">Roofing</div></div>
+    </div>
+    <div class="gallery-item" data-cat="decorating">
+      <div class="gallery-placeholder"><div class="gallery-placeholder-icon">🪣</div><div class="gallery-placeholder-label">Your photo here</div></div>
+      <div class="gallery-overlay"><div class="gallery-overlay-title">External Painting</div><div class="gallery-overlay-tag">Painting & Decorating</div></div>
+    </div>
+    <div class="gallery-item" data-cat="plumbing">
+      <div class="gallery-placeholder"><div class="gallery-placeholder-icon">🚿</div><div class="gallery-placeholder-label">Your photo here</div></div>
+      <div class="gallery-overlay"><div class="gallery-overlay-title">Kitchen Plumbing Install</div><div class="gallery-overlay-tag">Plumbing</div></div>
+    </div>
+  </div>
+
+  <div class="gallery-cta">
+    <p>Want to see more? Get in touch and we'll walk you through similar past projects.</p>
+    <a href="#contact" class="btn-primary">Discuss Your Project</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label">Get In Touch</div>
+  <div class="section-title">Request a <span>Free Quote</span></div>
+  <div class="section-desc">Fill in the form and we'll get back to you within 24 hours. No obligation, no hassle.</div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <h4>Phone</h4>
+          <p>Available 7 days a week</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <h4>Email</h4>
+          <p>info@tripleaconstruction.co.uk</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <h4>Coverage</h4>
+          <p>Nationwide — all across the UK</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🏢</div>
+        <div>
+          <h4>Landlord & Commercial Enquiries</h4>
+          <p>Dedicated line for property managers and organisations</p>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="return false;">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="John"/>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="07700 000000"/>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="john@example.com"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Type of Enquiry</label>
+        <select>
+          <option>Residential</option>
+          <option>Commercial / Landlord</option>
+          <option>Emergency Repair</option>
+          <option>General Enquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Service Required</label>
+        <select>
+          <option>General Building</option>
+          <option>Roofing</option>
+          <option>Plumbing</option>
+          <option>Electrical</option>
+          <option>Gas Engineering</option>
+          <option>Painting & Decorating</option>
+          <option>Handyman</option>
+          <option>Property Maintenance</option>
+          <option>Other / Multiple Services</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell us about your job</label>
+        <textarea placeholder="Describe what you need — location, size of job, any urgency..."></textarea>
+      </div>
+      <button class="form-submit" type="submit">Send Enquiry →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3><span>TRIPLE A</span> CONSTRUCTION</h3>
+      <p>Professional building and property maintenance services for residential and commercial clients across the UK. Qualified, insured and Gas Safe registered.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">General Building</a></li>
+        <li><a href="#services">Roofing</a></li>
+        <li><a href="#services">Plumbing</a></li>
+        <li><a href="#services">Electrical</a></li>
+        <li><a href="#services">Gas Engineering</a></li>
+        <li><a href="#services">Painting & Decorating</a></li>
+        <li><a href="#services">Handyman</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#sectors">Residential</a></li>
+        <li><a href="#sectors">Commercial</a></li>
+        <li><a href="#contact">Get a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Triple A Construction. All rights reserved.</p>
+    <p style="color:#444;">Gas Safe Registered · Qualified Electrician & Plumber · Fully Insured</p>
+  </div>
+</footer>
+
+<script>
+function filterGallery(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    if (cat === 'all' || item.dataset.cat === cat) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>
