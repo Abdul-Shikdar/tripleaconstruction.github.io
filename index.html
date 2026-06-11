@@ -1423,6 +1423,7 @@
       <div class="gallery-overlay"><div class="gallery-overlay-title">Hardwood Laminate Flooring</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
 
+  <div style="text-align:center;margin:30px 0;"><button id="loadMoreBtn" onclick="loadMore()" class="btn-primary" style="display:none;cursor:pointer;border:none;">Load More</button></div>
   <div class="gallery-cta">
     <p>Want to see more? Get in touch and we'll walk you through similar past projects.</p>
     <a href="#contact" class="btn-primary">Discuss Your Project</a>
@@ -1554,17 +1555,44 @@
 </footer>
 
 <script>
-function filterGallery(cat, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.gallery-item').forEach(item => {
-    if (cat === 'all' || item.dataset.cat === cat) {
-      item.style.display = '';
-    } else {
-      item.style.display = 'none';
-    }
+var currentCat = 'all';
+var visibleCount = 12;
+
+function getFilteredItems() {
+  return Array.from(document.querySelectorAll('.gallery-item')).filter(function(item) {
+    return currentCat === 'all' || item.dataset.cat === currentCat;
   });
 }
+
+function renderGallery() {
+  var all = document.querySelectorAll('.gallery-item');
+  all.forEach(function(item) { item.style.display = 'none'; });
+  var filtered = getFilteredItems();
+  filtered.slice(0, visibleCount).forEach(function(item) { item.style.display = ''; });
+  var btn = document.getElementById('loadMoreBtn');
+  var remaining = filtered.length - visibleCount;
+  if (remaining > 0) {
+    btn.style.display = 'inline-block';
+    btn.textContent = 'Load More (' + remaining + ' more photos)';
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
+function filterGallery(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  currentCat = cat;
+  visibleCount = 12;
+  renderGallery();
+}
+
+function loadMore() {
+  visibleCount += 12;
+  renderGallery();
+}
+
+window.onload = function() { renderGallery(); };
 </script>
 </body>
 </html>
