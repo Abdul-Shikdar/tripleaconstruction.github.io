@@ -894,6 +894,69 @@
     font-weight: 300;
   }
 
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox-img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 60px rgba(0,0,0,0.8);
+  }
+  .lightbox-close {
+    position: fixed;
+    top: 20px; right: 28px;
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+    line-height: 1;
+    font-family: 'Oswald', sans-serif;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    background: none;
+    border: none;
+  }
+  .lightbox-close:hover { opacity: 1; color: var(--gold); }
+  .lightbox-caption {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-align: center;
+  }
+  .lightbox-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 36px;
+    color: #fff;
+    cursor: pointer;
+    background: rgba(0,0,0,0.4);
+    border: none;
+    padding: 10px 16px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .lightbox-nav:hover { opacity: 1; color: var(--gold); }
+  .lightbox-prev { left: 10px; }
+  .lightbox-next { right: 10px; }
+  .gallery-item { cursor: zoom-in; }
+
   /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(30px); }
@@ -1204,222 +1267,222 @@
 
   <div class="gallery-grid" id="galleryGrid">
     <div class="gallery-item" data-cat="decorating">
-      <img src="images/dominos-shopfront.jpg" alt="Dominos shopfront fresh paint job" loading="lazy"/>
+      <img src="images/dominos-shopfront.jpg" alt="Dominos shopfront fresh paint job" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Commercial Shopfront — Fresh Paint</div><div class="gallery-overlay-tag">Painting & Decorating</div></div>
     </div>
     <div class="gallery-item" data-cat="roofing">
-      <img src="images/loft-skylights.jpg" alt="Loft conversion with skylights" loading="lazy"/>
+      <img src="images/loft-skylights.jpg" alt="Loft conversion with skylights" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Loft Conversion with Skylights</div><div class="gallery-overlay-tag">Roofing</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/side-extension.jpg" alt="Side extension 4 bedroom house" loading="lazy"/>
+      <img src="images/side-extension.jpg" alt="Side extension 4 bedroom house" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Side Extension — 1 Bedroom Flat</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="roofing">
-      <img src="images/dormer-scaffolding.jpg" alt="Rear dormer and loft conversion scaffolding" loading="lazy"/>
+      <img src="images/dormer-scaffolding.jpg" alt="Rear dormer and loft conversion scaffolding" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Rear Dormer & Loft Conversion</div><div class="gallery-overlay-tag">Roofing</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/k-rend-external.jpg" alt="External K rend granite colour" loading="lazy"/>
+      <img src="images/k-rend-external.jpg" alt="External K rend granite colour" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">External K Rend — Granite Finish</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/steel-beam-extension.jpg" alt="Steel beam installation extension" loading="lazy"/>
+      <img src="images/steel-beam-extension.jpg" alt="Steel beam installation extension" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Steel Beam Installation</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="decorating">
-      <img src="images/plastering-room.jpg" alt="Fresh plastering room renovation" loading="lazy"/>
+      <img src="images/plastering-room.jpg" alt="Fresh plastering room renovation" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Full Room Plaster & Skim</div><div class="gallery-overlay-tag">Painting & Decorating</div></div>
     </div>
     <div class="gallery-item" data-cat="decorating">
-      <img src="images/plastering-bathroom.jpg" alt="Bathroom plastering work" loading="lazy"/>
+      <img src="images/plastering-bathroom.jpg" alt="Bathroom plastering work" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Bathroom Plaster & Prep</div><div class="gallery-overlay-tag">Painting & Decorating</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/garden-slabs-astroturf.jpg" alt="New slabs astro turf and fence panels" loading="lazy"/>
+      <img src="images/garden-slabs-astroturf.jpg" alt="New slabs astro turf and fence panels" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Slabs, Astro Turf & Fencing</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/summerhouse-storage.jpg" alt="Summerhouse with additional storage shed" loading="lazy"/>
+      <img src="images/summerhouse-storage.jpg" alt="Summerhouse with additional storage shed" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Summerhouse & Storage Build</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/garden-path.jpg" alt="New garden path with slabs and gravel" loading="lazy"/>
+      <img src="images/garden-path.jpg" alt="New garden path with slabs and gravel" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Garden Path — Slabs & Gravel</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/church-hall-floor.jpg" alt="Church hall floor sanded and stained" loading="lazy"/>
+      <img src="images/church-hall-floor.jpg" alt="Church hall floor sanded and stained" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Church Hall Floor — Sanded & Stained</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
   </div>
 
 
     <div class="gallery-item" data-cat="building">
-      <img src="images/rear-extension-kitchen.jpg" alt="Rear permitted development kitchen and utility" loading="lazy"/>
+      <img src="images/rear-extension-kitchen.jpg" alt="Rear permitted development kitchen and utility" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Rear Extension — Kitchen & Utility</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/rear-extension-bifold.jpg" alt="Rear extension bifold doors" loading="lazy"/>
+      <img src="images/rear-extension-bifold.jpg" alt="Rear extension bifold doors" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Rear Extension — Bifold Doors</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/media-wall.jpg" alt="Media wall with fireplace" loading="lazy"/>
+      <img src="images/media-wall.jpg" alt="Media wall with fireplace" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Media Wall with Fireplace</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/kitchen-diner-partition.jpg" alt="Kitchen diner partition removal" loading="lazy"/>
+      <img src="images/kitchen-diner-partition.jpg" alt="Kitchen diner partition removal" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Kitchen Diner — Wall Removal</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/load-bearing-wall-rsj.jpg" alt="Load bearing wall RSJ rear extension" loading="lazy"/>
+      <img src="images/load-bearing-wall-rsj.jpg" alt="Load bearing wall RSJ rear extension" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Load Bearing Wall — RSJ</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/rear-extension-utility.jpg" alt="Rear extension utility bathroom" loading="lazy"/>
+      <img src="images/rear-extension-utility.jpg" alt="Rear extension utility bathroom" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Rear Extension — Utility & Bathroom</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="roofing">
-      <img src="images/roof-tiling.jpg" alt="New roof tiling" loading="lazy"/>
+      <img src="images/roof-tiling.jpg" alt="New roof tiling" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Full Roof Retile</div><div class="gallery-overlay-tag">Roofing</div></div>
     </div>
     <div class="gallery-item" data-cat="roofing">
-      <img src="images/loft-conversion-room.jpg" alt="Loft conversion finished room" loading="lazy"/>
+      <img src="images/loft-conversion-room.jpg" alt="Loft conversion finished room" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Loft Conversion — Finished Room</div><div class="gallery-overlay-tag">Roofing</div></div>
     </div>
     <div class="gallery-item" data-cat="decorating">
-      <img src="images/grey-k-rend.jpg" alt="Grey K rend exterior" loading="lazy"/>
+      <img src="images/grey-k-rend.jpg" alt="Grey K rend exterior" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">External Grey K Rend</div><div class="gallery-overlay-tag">Painting & Decorating</div></div>
     </div>
     <div class="gallery-item" data-cat="decorating">
-      <img src="images/k-rend-grey-house.jpg" alt="Full house external render" loading="lazy"/>
+      <img src="images/k-rend-grey-house.jpg" alt="Full house external render" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Full House External Render</div><div class="gallery-overlay-tag">Painting & Decorating</div></div>
     </div>
     <div class="gallery-item" data-cat="decorating">
-      <img src="images/resin-driveway.jpg" alt="Resin driveway complete" loading="lazy"/>
+      <img src="images/resin-driveway.jpg" alt="Resin driveway complete" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Resin Driveway & Plasterboard Skim</div><div class="gallery-overlay-tag">Painting & Decorating</div></div>
     </div>
     <div class="gallery-item" data-cat="decorating">
-      <img src="images/dominos-flooring.jpg" alt="Commercial flooring Dominos" loading="lazy"/>
+      <img src="images/dominos-flooring.jpg" alt="Commercial flooring Dominos" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Commercial Flooring — Dominos</div><div class="gallery-overlay-tag">Painting & Decorating</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/patio-slabs-grey.jpg" alt="Grey patio slabs" loading="lazy"/>
+      <img src="images/patio-slabs-grey.jpg" alt="Grey patio slabs" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Grey Porcelain Patio</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/porcelain-patio-laying.jpg" alt="Porcelain patio being laid" loading="lazy"/>
+      <img src="images/porcelain-patio-laying.jpg" alt="Porcelain patio being laid" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Porcelain Patio Installation</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/porcelain-steps.jpg" alt="Porcelain steps and patio" loading="lazy"/>
+      <img src="images/porcelain-steps.jpg" alt="Porcelain steps and patio" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Porcelain Steps & Patio</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/composite-decking.jpg" alt="Composite decking and shed" loading="lazy"/>
+      <img src="images/composite-decking.jpg" alt="Composite decking and shed" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Composite Decking & Shed</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/gravel-patio-path.jpg" alt="Gravel and patio path" loading="lazy"/>
+      <img src="images/gravel-patio-path.jpg" alt="Gravel and patio path" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Gravel & Patio Path</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
 
 
     <div class="gallery-item" data-cat="decorating">
-      <img src="images/bathroom-plastering-2.jpg" alt="Bathroom plastering and skim" loading="lazy"/>
+      <img src="images/bathroom-plastering-2.jpg" alt="Bathroom plastering and skim" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Bathroom Plaster & Skim</div><div class="gallery-overlay-tag">Painting & Decorating</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/brick-wall-new.jpg" alt="New brick front wall" loading="lazy"/>
+      <img src="images/brick-wall-new.jpg" alt="New brick front wall" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">New Brick Front Wall</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/brick-wall-rebuild.jpg" alt="Brick wall rebuild" loading="lazy"/>
+      <img src="images/brick-wall-rebuild.jpg" alt="Brick wall rebuild" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Brick Wall Rebuild</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/side-gate-new.jpg" alt="New side gate with lock" loading="lazy"/>
+      <img src="images/side-gate-new.jpg" alt="New side gate with lock" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">New Side Gate with Lock</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="decorating">
-      <img src="images/external-render-scaffolding.jpg" alt="External render and scaffolding" loading="lazy"/>
+      <img src="images/external-render-scaffolding.jpg" alt="External render and scaffolding" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">External Render & Windows</div><div class="gallery-overlay-tag">Painting & Decorating</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/porch-build-windows-doors.jpg" alt="New porch build with windows and doors" loading="lazy"/>
+      <img src="images/porch-build-windows-doors.jpg" alt="New porch build with windows and doors" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">New Porch — Windows & Doors</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/rear-extension-cladding.jpg" alt="Rear extension with external cladding" loading="lazy"/>
+      <img src="images/rear-extension-cladding.jpg" alt="Rear extension with external cladding" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Rear Extension — External Cladding</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="decorating">
-      <img src="images/ceiling-replaced-skimmed.jpg" alt="Ceiling replaced boarded and skimmed" loading="lazy"/>
+      <img src="images/ceiling-replaced-skimmed.jpg" alt="Ceiling replaced boarded and skimmed" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Ceiling Replacement & Skim</div><div class="gallery-overlay-tag">Painting & Decorating</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/porcelain-patio-complete.jpg" alt="Porcelain patio complete" loading="lazy"/>
+      <img src="images/porcelain-patio-complete.jpg" alt="Porcelain patio complete" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Porcelain Patio — Completed</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
 
 
     <div class="gallery-item" data-cat="building">
-      <img src="images/porcelain-steps-2.jpg" alt="Porcelain steps and patio" loading="lazy"/>
+      <img src="images/porcelain-steps-2.jpg" alt="Porcelain steps and patio" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Porcelain Steps & Patio</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/printed-driveway.jpg" alt="Printed concrete driveway" loading="lazy"/>
+      <img src="images/printed-driveway.jpg" alt="Printed concrete driveway" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Printed Concrete Driveway</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/commercial-scaffolding-renovation.jpg" alt="Commercial scaffolding and renovation" loading="lazy"/>
+      <img src="images/commercial-scaffolding-renovation.jpg" alt="Commercial scaffolding and renovation" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Commercial Building Renovation</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="decorating">
-      <img src="images/tower-scaffolding-k-rend.jpg" alt="Tower scaffolding K render guttering" loading="lazy"/>
+      <img src="images/tower-scaffolding-k-rend.jpg" alt="Tower scaffolding K render guttering" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">K Rend & New Guttering</div><div class="gallery-overlay-tag">Painting & Decorating</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/tarmac-driveway-garage.jpg" alt="Tarmac driveway and double garage" loading="lazy"/>
+      <img src="images/tarmac-driveway-garage.jpg" alt="Tarmac driveway and double garage" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Tarmac Driveway & Double Garage</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/resin-driveway-laying.jpg" alt="Resin driveway being laid" loading="lazy"/>
+      <img src="images/resin-driveway-laying.jpg" alt="Resin driveway being laid" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Resin Driveway Installation</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/steps-patio-design.jpg" alt="Steps and patio design" loading="lazy"/>
+      <img src="images/steps-patio-design.jpg" alt="Steps and patio design" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Steps & Patio Design</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="roofing">
-      <img src="images/roof-felting-new.jpg" alt="New roof felting and battening" loading="lazy"/>
+      <img src="images/roof-felting-new.jpg" alt="New roof felting and battening" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Roof Felt & Batten</div><div class="gallery-overlay-tag">Roofing</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/resin-driveway-edging.jpg" alt="Resin driveway with block edging" loading="lazy"/>
+      <img src="images/resin-driveway-edging.jpg" alt="Resin driveway with block edging" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Resin Driveway & Block Edging</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/astroturf-planters-patio.jpg" alt="Astroturf planters and patio" loading="lazy"/>
+      <img src="images/astroturf-planters-patio.jpg" alt="Astroturf planters and patio" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Astroturf, Planters & Patio</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="roofing">
-      <img src="images/loft-conversion-stairs.jpg" alt="Loft conversion with new stairs" loading="lazy"/>
+      <img src="images/loft-conversion-stairs.jpg" alt="Loft conversion with new stairs" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Loft Conversion with Stairs</div><div class="gallery-overlay-tag">Roofing</div></div>
     </div>
     <div class="gallery-item" data-cat="roofing">
-      <img src="images/new-roof-replacement.jpg" alt="Full roof replacement" loading="lazy"/>
+      <img src="images/new-roof-replacement.jpg" alt="Full roof replacement" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Full Roof Replacement</div><div class="gallery-overlay-tag">Roofing</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/perimeter-wall-rebuild.jpg" alt="Perimeter wall rebuild" loading="lazy"/>
+      <img src="images/perimeter-wall-rebuild.jpg" alt="Perimeter wall rebuild" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Perimeter Wall Rebuild</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/wraparound-extension-loft.jpg" alt="Wrap around extension with loft" loading="lazy"/>
+      <img src="images/wraparound-extension-loft.jpg" alt="Wrap around extension with loft" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Wraparound Extension & Loft</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
     <div class="gallery-item" data-cat="building">
-      <img src="images/hardwood-laminate-flooring.jpg" alt="Hardwood laminate flooring" loading="lazy"/>
+      <img src="images/hardwood-laminate-flooring.jpg" alt="Hardwood laminate flooring" onclick="openLightbox(this.src, this.alt)" loading="lazy"/>
       <div class="gallery-overlay"><div class="gallery-overlay-title">Hardwood Laminate Flooring</div><div class="gallery-overlay-tag">General Building</div></div>
     </div>
 
@@ -1429,6 +1492,16 @@
     <a href="#contact" class="btn-primary">Discuss Your Project</a>
   </div>
 </section>
+
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation();navigateLight(-1)">&#8249;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt=""/>
+  <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation();navigateLight(1)">&#8250;</button>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
@@ -1441,14 +1514,14 @@
         <div class="contact-icon">📞</div>
         <div>
           <h4>Phone</h4>
-          <p>Available 7 days a week</p>
+          <p><a href="tel:TBC" id="phoneLink" style="color:var(--text);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--brick)'" onmouseout="this.style.color='var(--text)'">Number coming soon</a></p>
         </div>
       </div>
       <div class="contact-item">
         <div class="contact-icon">✉️</div>
         <div>
           <h4>Email</h4>
-          <p>info@tripleaconstruction.co.uk</p>
+          <p><a href="mailto:info@tripleaconstruction.co.uk" style="color:var(--text);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--brick)'" onmouseout="this.style.color='var(--text)'">info@tripleaconstruction.co.uk</a></p>
         </div>
       </div>
       <div class="contact-item">
@@ -1555,6 +1628,52 @@
 </footer>
 
 <script>
+
+var lightboxImages = [];
+var lightboxIndex = 0;
+
+function openLightbox(img, caption) {
+  var items = Array.from(document.querySelectorAll('.gallery-item')).filter(function(i) {
+    return i.style.display !== 'none';
+  });
+  lightboxImages = items.map(function(item) {
+    var i = item.querySelector('img');
+    var t = item.querySelector('.gallery-overlay-title');
+    return { src: i ? i.src : '', caption: t ? t.textContent : '' };
+  });
+  lightboxIndex = lightboxImages.findIndex(function(i) { return i.src === img; });
+  if (lightboxIndex === -1) lightboxIndex = 0;
+  showLightboxImage();
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function showLightboxImage() {
+  var item = lightboxImages[lightboxIndex];
+  document.getElementById('lightboxImg').src = item.src;
+  document.getElementById('lightboxCaption').textContent = item.caption + ' (' + (lightboxIndex+1) + ' / ' + lightboxImages.length + ')';
+}
+
+function navigateLight(dir) {
+  lightboxIndex = (lightboxIndex + dir + lightboxImages.length) % lightboxImages.length;
+  showLightboxImage();
+}
+
+function closeLightbox(e) {
+  if (!e || e.target === document.getElementById('lightbox') || e.target.classList.contains('lightbox-close')) {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  var lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox({target: lb});
+  if (e.key === 'ArrowRight') navigateLight(1);
+  if (e.key === 'ArrowLeft') navigateLight(-1);
+});
+
 var currentCat = 'all';
 var visibleCount = 12;
 
